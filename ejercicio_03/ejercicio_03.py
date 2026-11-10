@@ -63,25 +63,37 @@ Ejecuta este archivo desde la carpeta principal con:
 
 
 def reporte_grupos(grupos, nota_minima=60):
-    pass
+    reporte = []
+    
+    for numero_grupo, notas in enumerate(grupos, start=1):
+        total_estudiantes = len(notas)
+        aprobados = contar_desde_limite(notas, nota_minima)
+        reprobados = total_estudiantes - aprobados
+        
+        reporte.append({
+            "grupo": numero_grupo,
+            "cantidad": total_estudiantes,
+            "aprobados": aprobados,
+            "reprobados": reprobados
+        })
+        
+    return reporte
 
 
-# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Preguntas de análisis (responde debajo de cada pregunta)
-# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # 1. ¿Qué devuelve enumerate() en cada iteración?
-#
-#
+# Devuelve una tupla con el contador actual (iniciando en 1 por start=1) y el elemento correspondiente de la lista (las notas del grupo).
+
 # 2. ¿Qué parte del problema resuelve el ciclo?
-#
-#
+# Resuelve el recorrido iterativo de cada uno de los grupos contenidos en la lista principal.
+
 # 3. ¿Qué parte resuelve la función recursiva?
-#
-#
-# 4. ¿Por qué un grupo vacío debe aparecer en el reporte aunque no tenga
-#    estudiantes?
-#
-#
+# Resuelve el conteo de calificaciones que son mayores o iguales a la nota mínima dentro de cada grupo.
+
+# 4. ¿Por qué un grupo vacío debe aparecer en el reporte aunque no tenga estudiantes?
+# Porque representa un grupo registrado formalmente en la institución, indicando que su cantidad de estudiante, aprobados y reprobados es 0.
 
 
 if __name__ == "__main__":
@@ -91,8 +103,4 @@ if __name__ == "__main__":
         [40, 60, 75, 59]
     ]
     print(reporte_grupos(grupos))
-    # [{'grupo': 1, 'cantidad': 3, 'aprobados': 2, 'reprobados': 1},
-    #  {'grupo': 2, 'cantidad': 0, 'aprobados': 0, 'reprobados': 0},
-    #  {'grupo': 3, 'cantidad': 4, 'aprobados': 2, 'reprobados': 2}]
-
     print(reporte_grupos([]))   # []
