@@ -32,31 +32,41 @@ Restricciones
 
 
 def contar_desde_limite(valores, limite, i=0):
-    """Cuenta desde la posición i hasta el final. Se asume 0 <= i <= len(valores)."""
-    pass
+    # Caso base: si ya alcanzamos el final de la lista
+    if i >= len(valores):
+        return 0
+    
+    # Evaluar si el elemento actual cumple la condición
+    cumple = 1 if valores[i] >= limite else 0
+    
+    # Llamada recursiva avanzando el índice i
+    return cumple + contar_desde_limite(valores, limite, i + 1)
 
 
 def contar_desde_limite_iterativo(valores, limite):
     """Cuenta en la lista completa usando un ciclo."""
-    pass
+    contador = 0
+    for val in valores:
+        if val >= limite:
+            contador += 1
+    return contador
 
 
-# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Preguntas de análisis (responde debajo de cada pregunta)
-# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # 1. ¿Qué representa el parámetro i?
-#
-#
+# Representa la posición o índice actual de la lista desde el cual se iniciará a evaluar.
+
 # 2. ¿Qué cantidad disminuye a medida que aumenta i?
-#
-#
+# Disminuye la cantidad de elementos restantes por evaluar en la lista (len(valores) - i).
+
 # 3. ¿Qué devuelve una llamada si el elemento actual no cumple la condición?
-#
-#
-# 4. ¿Qué diferencia hay entre la información pendiente de la versión
-#    recursiva y la de la iterativa?
-#
-#
+# Devuelve 0 más el resultado de la llamada recursiva para el siguiente índice (0 + contar_desde_limite(valores, limite, i + 1)).
+
+# 4. ¿Qué diferencia hay entre la información pendiente de la versión recursiva y la de la iterativa?
+# En la versión recursiva, cada llamada deja pendiente una suma acumulativa en la pila de llamadas hasta llegar al final. En la versión iterativa, el conteo se actualiza directamente en una variable local sin acumular llamadas pendientes en memoria.
+
 
 
 if __name__ == "__main__":
